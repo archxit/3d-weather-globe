@@ -1,0 +1,492 @@
+/* ========================================
+   GLOBAL STYLES & RESET
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================
+   HEADER SECTION
+   ======================================== */
+
+
+
+/* ========================================
+   SEARCH BAR
+   ======================================== */
+
+.search-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+
+.search-input {
+    flex: 1;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+    border-color: #64b5f6;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(100, 181, 246, 0.3);
+}
+
+.search-btn {
+    padding: 0.9rem 1.5rem;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    backdrop-filter: blur(1px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(66, 165, 245, 0.3);
+}
+
+.search-btn:hover {
+    background: rgba(100, 181, 246, 0.35);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+}
+
+.search-btn:active {
+    transform: scale(0.97);
+}
+
+.search-icon {
+    display: inline-block;
+}
+
+/* Optional animation for the dot */
+@keyframes pulseDot {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   MAIN CONTENT AREA
+   ======================================== */
+
+.main-content {
+    flex: 1;
+    display: flex;
+    position: relative;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+/* ========================================
+   GLOBE CONTAINER
+   ======================================== */
+
+.globe-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#globeViz {
+    width: 100%;
+    height: 100%;
+}
+
+/* ========================================
+   INFO  (GLASSMORPHISM)
+   ======================================== */
+
+.info-panel {
+    width: 350px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 0.8rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    animation: slideIn 0.5s ease-out;
+}
+
+.info-panel.hidden {
+    display: none;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Panel Header */
+.panel-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#cityName {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #64b5f6;
+}
+
+#countryName {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================
+   WEATHER MAIN DISPLAY
+   ======================================== */
+
+.weather-main {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.temperature-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.temperature {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+}
+
+.unit {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-icon img {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.weather-description {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.5rem;
+}
+
+/* ========================================
+   WEATHER DETAILS GRID
+   ======================================== */
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    text-wrap-mode: nowrap;
+}
+
+.detail-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.3rem;
+}
+
+.detail-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* ========================================
+   LOADING & ERROR STATES
+   ======================================== */
+
+.loading-indicator {
+    text-align: center;
+    padding: 2rem;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #64b5f6;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    border-radius: 10px;
+    color: #ff5252;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .info-panel {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .globe-container {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .search-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .temperature {
+        font-size: 3rem;
+    }
+
+    .weather-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .info-panel {
+        padding: 1.5rem;
+    }
+
+    #cityName {
+        font-size: 1.5rem;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+}
+
+/* ===============================
+   SLIDING INFO PANEL TOGGLE
+   =============================== */
+.info-panel {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    height: calc(100% - 100px);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 5;
+}
+
+.info-panel.collapsed {
+    transform: translateX(110%);
+    opacity: 0;
+}
+
+/* Small toggle button */
+#togglePanelBtn {
+    position: absolute;
+    right: 370px;
+    top: 90px;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    z-index: 6;
+    transition: all 0.3s ease;
+}
+
+#togglePanelBtn.move-right {
+    transform: translateX(340px);
+}
+
+#togglePanelBtn:hover {
+    background: rgba(100, 181, 246, 0.2);
+}
+
+/* ========================================
+   🌍 Enhanced City Label Styling for Globe
+   ======================================== */
+
+:global(.scene-tooltip) {
+    background: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 215, 0, 0.6);
+    border-radius: 8px;
+    padding: 8px 14px !important;
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #FFD700 !important;
+    letter-spacing: 0.8px;
+    text-shadow:
+        0 0 10px rgba(255, 215, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.9) !important;
+    box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+    animation: labelGlow 2s ease-in-out infinite;
+}
+
+@keyframes labelGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 10px rgba(255, 215, 0, 0.8),
+            0 0 20px rgba(255, 215, 0, 0.5),
+            0 2px 4px rgba(0, 0, 0, 0.9);
+        border-color: rgba(255, 215, 0, 0.6);
+    }
+
+    50% {
+        text-shadow:
+            0 0 15px rgba(255, 215, 0, 1),
+            0 0 30px rgba(255, 215, 0, 0.7),
+            0 2px 4px rgba(0, 0, 0, 0.9);
+        border-color: rgba(255, 215, 0, 0.9);
+    }
+}

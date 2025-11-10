@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Interactive 3D Weather Globe Dashboard - Search any city and view real-time weather data">
+    <meta name="keywords" content="weather, 3D globe, interactive map, climate data">
+    <meta name="author" content="Your Name">
+    <title>3D Weather Globe Dashboard</title>
+
+    <!-- Globe.gl Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Header Section with Search -->
+        <header class="header">
+            <!-- <h1 class="title">🌍 Global Weather Explorer</h1> -->
+            <div class="search-container">
+                <input type="text" id="citySearch" class="search-input" placeholder="Search for a city..."
+                    autocomplete="off">
+                <button id="searchBtn" class="search-btn">
+                    <span class="search-icon">🔍</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- 3D Globe Container -->
+            <div id="globeContainer" class="globe-container">
+                <!-- Globe will be rendered here by JavaScript -->
+            </div>
+            <button id="togglePanelBtn">➡️</button>
+
+            <!-- Weather Information Panel -->
+            <aside id="infoPanel" class="info-panel hidden">
+                <div class="panel-header">
+                    <h2 id="cityName">City Name</h2>
+                    <p id="countryName">Country</p>
+                </div>
+
+                <div class="weather-main">
+                    <div class="temperature-display">
+                        <span id="temperature" class="temperature">--</span>
+                        <span class="unit">°C</span>
+                    </div>
+                    <div class="weather-icon">
+                        <img id="weatherIcon" src="" alt="Weather icon">
+                    </div>
+                    <p id="weatherDescription" class="weather-description">--</p>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="detail-label">📍 Coordinates</span>
+                        <span id="coordinates" class="detail-value">--, --</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">💧 Humidity</span>
+                        <span id="humidity" class="detail-value">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">💨 Wind Speed</span>
+                        <span id="windSpeed" class="detail-value">-- m/s</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">🌡️ Feels Like</span>
+                        <span id="feelsLike" class="detail-value">--°C</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">👁️ Visibility</span>
+                        <span id="visibility" class="detail-value">-- km</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">🔽 Pressure</span>
+                        <span id="pressure" class="detail-value">-- hPa</span>
+                    </div>
+                </div>
+
+                <div class="loading-indicator hidden" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p>Loading weather data...</p>
+                </div>
+
+                <div class="error-message hidden" id="errorMessage">
+                    <p>⚠️ Unable to fetch weather data</p>
+                </div>
+            </aside>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by OpenWeatherMap API | Built with Globe.gl & Three.js</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
