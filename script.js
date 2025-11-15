@@ -3,8 +3,8 @@
    ======================================== */
 
 // API Keys (You need to replace these with your own!)
-const WEATHER_API_KEY = "8072e3852d7b0a4f5bae5c865f0025d7";
-const GEODB_API_KEY = "360e6d2332f328e1bc52bd042ab5d52b9b3c5a22"; // Optional: for city autocomplete
+const WEATHER_API_KEY = "WEATHER_API_KEY";
+const GEODB_API_KEY = "GEODB_API_KEY"; // Optional: for city autocomplete
 
 // Globe instance
 let myGlobe;
@@ -530,3 +530,4 @@ console.log(`
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Ready! 🚀
 `);
+
